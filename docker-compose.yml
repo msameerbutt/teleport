@@ -1,0 +1,37 @@
+version: '3.7'
+
+networks:
+  dev-stack:
+    driver: bridge
+    name: dev-stack
+
+services:
+  configure:
+    image: quay.io/gravitational/teleport:5
+    container_name: teleport-configure
+    entrypoint: /bin/sh
+    hostname: localhost
+    command: -c "if [ ! -f /etc/teleport/teleport.yaml ]; then teleport configure > /etc/teleport/teleport.yaml; fi"
+    volumes:
+      - ./config:/etc/teleport
+    networks:
+      - dev-stack
+
+  teleport:
+    image: quay.io/gravitational/teleport:6
+    container_name: teleport
+    entrypoint: /bin/sh
+    hostname: localhost
+    command: -c "sleep 1 && /bin/dumb-init teleport start -c /etc/teleport/teleport.yaml"
+    ports:
+      - "3023:3023"
+      - "3024:3024"
+      - "3025:3025"
+      - "3080:3080"
+    volumes:
+      - ./config:/etc/teleport
+      - ./data:/var/lib/teleport
+    depends_on:
+      - configure
+    networks:
+      - dev-stack
