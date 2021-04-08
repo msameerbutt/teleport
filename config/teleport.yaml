@@ -21,6 +21,7 @@ teleport:
 auth_service:
   enabled: "yes"
   listen_addr: 0.0.0.0:3025
+  public_addr: localhost:3025
   tokens:
   - proxy,node:0539e3651d2edaea50fee31a7adbcc2d9ff6c8f2d574de5d
   license_file: /path/to/license-if-using-teleport-enterprise.pem

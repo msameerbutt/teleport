@@ -1,0 +1,2 @@
+{"ei":0,"event":"user.create","uid":"46043cb4-8744-4d7e-9f49-129b0db77fb2","code":"T1002I","time":"2021-04-08T08:55:47.096Z","cluster_name":"","user":"2d787c8a-35e1-47e7-a46f-6e27b72df554.localhost","name":"testuser","expires":"0001-01-01T00:00:00Z","roles":["admin"],"connector":"local"}
+{"ei":0,"event":"reset_password_token.create","uid":"c185cff0-4803-4059-b716-5e88ca34f80d","code":"T6000I","time":"2021-04-08T08:55:47.226Z","cluster_name":"","name":"testuser","expires":"2021-04-08T09:55:47.2258267Z","ttl":"1h0m0s","user":"2d787c8a-35e1-47e7-a46f-6e27b72df554.localhost"}

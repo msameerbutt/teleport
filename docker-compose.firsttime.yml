@@ -6,6 +6,17 @@ networks:
     name: dev-stack
 
 services:
+  configure:
+    image: quay.io/gravitational/teleport:5
+    container_name: teleport-configure
+    entrypoint: /bin/sh
+    hostname: localhost
+    command: -c "if [ ! -f /etc/teleport/teleport.yaml ]; then teleport configure > /etc/teleport/teleport.yaml; fi"
+    volumes:
+      - ./config:/etc/teleport
+    networks:
+      - dev-stack
+
   teleport:
     image: quay.io/gravitational/teleport:6
     container_name: teleport
@@ -20,5 +31,7 @@ services:
     volumes:
       - ./config:/etc/teleport
       - ./data:/var/lib/teleport
+    depends_on:
+      - configure
     networks:
       - dev-stack
